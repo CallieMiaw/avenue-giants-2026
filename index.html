@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Callie's Avenue of the Giants Trip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#122A3D;
+    --navy-deep:#0C1F2E;
+    --blue:#1E6E8C;
+    --blue-light:#6BAFC7;
+    --ice:#EAF4F7;
+    --paper:#FBFCFD;
+    --ink:#17262E;
+    --muted:#5C7480;
+    --line:#D7E6EB;
+    --warm:#DFA463;
+    --warm-soft:#FBF0E1;
+    --radius:14px;
+    --shadow:0 8px 24px rgba(18,42,61,0.10);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Work Sans',sans-serif;line-height:1.55;}
+  h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;margin:0;}
+  a{color:inherit;}
+  img{display:block;max-width:100%;}
+
+  .hero{
+    position:relative;min-height:78vh;display:flex;align-items:flex-end;
+    background:linear-gradient(180deg, rgba(12,31,46,0.15) 0%, rgba(12,31,46,0.55) 60%, rgba(12,31,46,0.92) 100%),
+      url('https://commons.wikimedia.org/wiki/Special:FilePath/CA%20254%20Avenue%20of%20the%20Giants.jpg') center/cover no-repeat;
+    color:#fff;padding:48px 6vw 40px;
+  }
+  .hero-inner{max-width:900px;}
+  .eyebrow{font-family:'Work Sans',sans-serif;text-transform:uppercase;letter-spacing:0.16em;font-size:12.5px;font-weight:600;color:var(--blue-light);margin-bottom:14px;}
+  .hero h1{font-size:clamp(2.4rem,6vw,4.2rem);color:#fff;line-height:1.02;}
+  .hero p{font-size:1.05rem;color:#DCE9EE;max-width:520px;margin-top:16px;}
+  .hero-stats{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap;}
+  .hero-stat .num{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:600;color:#fff;}
+  .hero-stat .label{font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:var(--blue-light);}
+
+  .daynav{position:sticky;top:0;z-index:40;background:var(--navy);display:flex;gap:4px;padding:10px 6vw;overflow-x:auto;box-shadow:0 2px 12px rgba(0,0,0,0.15);}
+  .daynav a{flex:0 0 auto;color:#BFD6DF;text-decoration:none;font-size:13.5px;font-weight:600;padding:8px 16px;border-radius:999px;white-space:nowrap;transition:background .15s ease, color .15s ease;}
+  .daynav a:hover{background:rgba(255,255,255,0.08);color:#fff;}
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 6vw;}
+  .intro{padding:56px 6vw 8px;max-width:920px;margin:0 auto;}
+  .intro p{color:var(--muted);font-size:1.05rem;max-width:640px;}
+
+  .day{padding:64px 0 8px;border-top:1px solid var(--line);}
+  .day:first-of-type{border-top:none;}
+  .day-head{display:flex;align-items:baseline;gap:18px;margin-bottom:10px;flex-wrap:wrap;}
+  .day-num{font-family:'Fraunces',serif;font-size:3.2rem;font-weight:700;color:var(--blue);line-height:1;}
+  .day-titles h2{font-size:1.5rem;color:var(--navy);}
+  .day-titles .date{color:var(--muted);font-size:14px;font-weight:600;letter-spacing:0.02em;}
+  .day-narrative{color:var(--ink);max-width:680px;margin:18px 0 34px;font-size:1.02rem;}
+
+  .route{position:relative;padding-left:28px;}
+  .route::before{content:"";position:absolute;left:9px;top:10px;bottom:10px;width:2px;background:repeating-linear-gradient(180deg,var(--blue-light) 0 6px, transparent 6px 12px);}
+  .stop{position:relative;margin-bottom:28px;}
+  .stop::before{content:"";position:absolute;left:-28px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--blue);border:3px solid var(--ice);}
+  .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:220px 1fr;}
+  .card.no-photo{grid-template-columns:1fr;}
+  .card img{width:100%;height:100%;object-fit:cover;min-height:150px;}
+  .card-body{padding:18px 22px;}
+  .card-body h3{font-size:1.15rem;color:var(--navy);margin-bottom:8px;}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+  .tag{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;background:var(--ice);color:var(--blue);padding:4px 10px;border-radius:999px;}
+  .tag.warm{background:var(--warm-soft);color:#9A6A2E;}
+  .tag.time{background:var(--navy);color:#fff;}
+  .card-note{color:var(--muted);font-size:14.5px;margin-top:4px;}
+
+  .connector{display:flex;align-items:center;gap:8px;margin:14px 0 14px -28px;padding-left:0;color:var(--blue);font-size:13px;font-weight:600;}
+  .connector .icon{width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex:0 0 auto;margin-left:-3px;}
+
+  .lodging{margin-top:8px;background:var(--navy);color:#fff;border-radius:var(--radius);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+  .lodging .label{font-size:11.5px;text-transform:uppercase;letter-spacing:0.1em;color:var(--blue-light);margin-bottom:4px;}
+  .lodging .name{font-family:'Fraunces',serif;font-size:1.2rem;}
+  .lodging .status{font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:999px;}
+  .status.booked{background:#254E5E;color:#9FE0C6;}
+  .status.open{background:var(--warm);color:#3B2A0F;}
+
+  .gtk{background:var(--ice);border-radius:20px;padding:44px 6vw;margin:70px 0 0;}
+  .gtk-inner{max-width:920px;margin:0 auto;}
+  .gtk h2{color:var(--navy);font-size:1.7rem;margin-bottom:24px;}
+  .gtk-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .gtk-item{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);}
+  .gtk-item h4{font-size:14px;color:var(--blue);margin:0 0 6px;text-transform:uppercase;letter-spacing:0.04em;}
+  .gtk-item p{margin:0;font-size:14.5px;color:var(--ink);}
+  .checklist{list-style:none;padding:0;margin:0;}
+  .checklist li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;padding:8px 0;border-bottom:1px dashed var(--line);}
+  .checklist li:last-child{border-bottom:none;}
+  .checklist .box{width:16px;height:16px;border-radius:4px;border:2px solid var(--warm);flex:0 0 auto;margin-top:2px;}
+
+  footer{text-align:center;padding:50px 6vw 60px;color:var(--muted);font-size:13px;}
+
+  @media (max-width:640px){
+    .card{grid-template-columns:1fr;}
+    .card img{min-height:170px;}
+    .gtk-grid{grid-template-columns:1fr;}
+    .day-num{font-size:2.4rem;}
+    .hero{min-height:60vh;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Weekend Trip &middot; Timed Itinerary</div>
+    <h1>Avenue of the Giants</h1>
+    <p>One night among the tallest trees on Earth, a real hike through old-growth redwoods, and a slow Sunday morning before heading home.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">2</div><div class="label">Days</div></div>
+      <div class="hero-stat"><div class="num">1</div><div class="label">Night</div></div>
+      <div class="hero-stat"><div class="num">~5.5</div><div class="label">Hrs Each Way</div></div>
+    </div>
+  </div>
+</header>
+
+<nav class="daynav">
+  <a href="#day1">Day 1 &middot; The Drive Up &amp; The Hike</a>
+  <a href="#day2">Day 2 &middot; Redwoods &amp; Ferndale</a>
+  <a href="#gtk">Good to Know</a>
+</nav>
+
+<section class="intro">
+  <p>One night, two days. Saturday's the big day, hiking through ancient redwoods, Sunday's slower, home well before your 8:30&ndash;9pm target.</p>
+</section>
+
+<main class="wrap">
+
+  <!-- DAY 1 -->
+  <section class="day" id="day1">
+    <div class="day-head">
+      <div class="day-num">01</div>
+      <div class="day-titles">
+        <h2>The Drive Up &amp; The Hike</h2>
+        <div class="date">Saturday</div>
+      </div>
+    </div>
+    <p class="day-narrative">Straight up 101 to Humboldt County, a quick bite in town, then into the redwoods for the two must-see groves and the real hike of the trip. Daylight stays outdoors today, the hotel doesn't see you until after dark.</p>
+
+    <div class="route">
+
+      <div class="stop">
+        <div class="card no-photo">
+          <div class="card-body">
+            <h3>Depart San Francisco</h3>
+            <div class="tags"><span class="tag time">7:00&ndash;7:30am</span></div>
+            <p class="card-note">Direct via Highway 101, ~4.5 hrs. Coffee before you go, not much en route.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="card no-photo">
+          <div class="card-body">
+            <h3>Arrive Garberville / Miranda &amp; Lunch</h3>
+            <div class="tags">
+              <span class="tag time">~11:30am&ndash;12:00pm arrive</span>
+              <span class="tag time">12:00&ndash;1:00pm lunch</span>
+            </div>
+            <p class="card-note"><strong>The Woodrose Cafe</strong> — organic, fresh, great sit-down lunch. Or <strong>Eel River Cafe</strong> for 1950s-diner charm and hearty classics. Grab-and-go instead: <strong>Il Forno Bakery</strong> for a breakfast sandwich and pastry to eat in the car.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Founders%20Grove%20-%20Coast%20Redwood%20(Sequoia%20sempervirens)%20-%20Flickr%20-%20Jay%20Sturner.jpg" alt="Founders Grove redwoods">
+          <div class="card-body">
+            <h3>Founders Grove + Rockefeller Loop</h3>
+            <div class="tags">
+              <span class="tag time">1:00&ndash;2:00pm</span>
+              <span class="tag">Easy &middot; 0.5mi each</span>
+            </div>
+            <p class="card-note">The two essential short stops. Founders Grove holds the Dyerville Giant, a 362-ft fallen redwood you can walk the full length of. Rockefeller Loop has some of the tallest trees on Earth.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Williams%20Grove%20-%20Humboldt%20Redwoods%20State%20Park%20-%20DSC02398.JPG" alt="Old growth redwood grove floor">
+          <div class="card-body">
+            <h3>Bull Creek Flats Trail</h3>
+            <div class="tags">
+              <span class="tag time">2:00&ndash;5:00pm</span>
+              <span class="tag">Moderate &middot; Half-day</span>
+            </div>
+            <p class="card-note">The real hike. Follows Bull Creek upstream through the heart of the old-growth flat, past the Giant Tree. Pick your own turnaround point.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector"><span class="icon">&#128663;</span> ~45min&ndash;1hr further north toward Loleta</div>
+
+      <div class="stop">
+        <div class="card no-photo">
+          <div class="card-body">
+            <h3>Sunset at Table Bluff</h3>
+            <div class="tags">
+              <span class="tag time">~6:00&ndash;7:45pm</span>
+              <span class="tag">Coastal overlook</span>
+            </div>
+            <p class="card-note">10 minutes from the hotel. Last light of the day, ocean views over the bluff, the payoff for staying out until dark instead of heading in early.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector"><span class="icon">&#128663;</span> Short drive, arrive after dark</div>
+
+      <div class="stop">
+        <div class="card no-photo">
+          <div class="card-body">
+            <h3>Check In, Dinner &amp; Poker</h3>
+            <div class="tags">
+              <span class="tag time">~8:00pm</span>
+              <span class="tag">Chill night</span>
+            </div>
+            <p class="card-note"><strong>Rivers Edge Grill &amp; Bar</strong> for a proper sit-down dinner with valley views, or <strong>Thirsty Bear Lounge</strong> for something more casual, pub food, cocktails, live music Fri/Sat. Then the tables. No rush, no agenda after this.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="lodging">
+      <div><div class="label">Tonight's Stay</div><div class="name">Bear River Casino Resort</div></div>
+      <div class="status booked">Loleta, CA</div>
+    </div>
+  </section>
+
+  <!-- DAY 2 -->
+  <section class="day" id="day2">
+    <div class="day-head">
+      <div class="day-num">02</div>
+      <div class="day-titles">
+        <h2>Redwoods &amp; Ferndale</h2>
+        <div class="date">Sunday</div>
+      </div>
+    </div>
+    <p class="day-narrative">You're already right next door to Ferndale from the casino, no detour required this time, then the longer drive home with plenty of buffer before your 8:30&ndash;9pm target.</p>
+
+    <div class="route">
+
+      <div class="stop">
+        <div class="card no-photo">
+          <div class="card-body">
+            <h3>Slow Morning</h3>
+            <div class="tags"><span class="tag time">Wake up whenever</span></div>
+            <p class="card-note">No alarm needed after a late poker night. Breakfast waits for Ferndale, just next door.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector"><span class="icon">&#128663;</span> ~10&ndash;15 min, right next door</div>
+
+      <div class="stop">
+        <div class="card">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Main%20Street%20Ferndale%202015.jpg" alt="Main Street Ferndale Victorian village">
+          <div class="card-body">
+            <h3>Breakfast &amp; Ferndale</h3>
+            <div class="tags">
+              <span class="tag">Victorian village</span>
+              <span class="tag">No detour needed</span>
+            </div>
+            <p class="card-note"><strong>Poppa Joe's</strong> — the local institution, bottomless $2 coffee, huge portions, cash only. It even has a poker room in back, fitting given last night. For specialty coffee instead, <strong>Mind's Eye Manufactory &amp; Coffee Lounge</strong> has third-wave espresso and pour-over. Either way, wander Main Street's well-preserved Victorian storefronts after.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector"><span class="icon">&#128663;</span> ~5.5 hrs direct via 101</div>
+
+      <div class="stop">
+        <div class="card no-photo">
+          <div class="card-body">
+            <h3>Depart for Home</h3>
+            <div class="tags">
+              <span class="tag time">~11:00am&ndash;12:00pm departure</span>
+              <span class="tag warm">Home ~4:30&ndash;5:30pm</span>
+            </div>
+            <p class="card-note">Still comfortably ahead of your 8:30&ndash;9pm target, even with the longer haul back from Loleta. You could leave as late as ~2:30&ndash;3pm and still make it home in time.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<section class="gtk" id="gtk">
+  <div class="gtk-inner">
+    <h2>Good to Know</h2>
+    <div class="gtk-grid">
+      <div class="gtk-item">
+        <h4>The Drive</h4>
+        <p>~5.5 hrs each way to Loleta direct via 101. The redwoods sit right along the way, so no backtracking, you pass through the Avenue en route both directions.</p>
+      </div>
+      <div class="gtk-item">
+        <h4>Redwood National Park</h4>
+        <p>Another 2 hrs north of Garberville, tempting since you're already up there, but it deserves its own dedicated trip (Fern Canyon, Tall Trees Grove) rather than a rushed bolt-on.</p>
+      </div>
+      <div class="gtk-item">
+        <h4>Bear Country</h4>
+        <p>Proper food storage required at the campgrounds. Dogs are not allowed on park trails.</p>
+      </div>
+      <div class="gtk-item">
+        <h4>Pack Layers</h4>
+        <p>Temperatures range 55&ndash;85&deg;F depending on sun/shade and time of day. Mornings under the canopy run cool.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top:40px;font-size:1.3rem;">Still Open</h2>
+    <ul class="checklist">
+      <li><span class="box"></span> Confirm Bear River Casino Resort reservation</li>
+      <li><span class="box"></span> Confirm actual trip dates</li>
+    </ul>
+  </div>
+</section>
+
+<footer>One night, ancient trees, home before dark. &mdash; Callie's Avenue of the Giants Itinerary</footer>
+
+</body>
+</html>
